@@ -79,13 +79,16 @@ void setup()
     */
 }
 
+byte doute = 0;
+    
 void loop()
 {
     byte ispressed = 0;
     byte needBuzz = 0;
-    byte doute = 0;
+
     if(digitalRead(btn0) == HIGH)
     {
+      Serial.println(0);
       time = millis();
       currentScore = 0;
       needBuzz = 1;
@@ -93,48 +96,51 @@ void loop()
     }
     if(digitalRead(btn1) == HIGH)
     {
+      Serial.println(1);
       time = millis();
       currentScore = 1;
-      needBuzz = 1;
-      ispressed = 1;
+      needBuzz = 1;      
       if(ispressed == 1)
       {
-        doute = 1;
-        
+        doute = 1;        
       }      
+      ispressed = 1;
     }      
     if(digitalRead(btn2) == HIGH)
     {
+      Serial.println(2);
       time = millis();
       currentScore = 2;
-      needBuzz = 1;
-      ispressed = 1;
+      needBuzz = 1;      
       if(ispressed == 1)
       {
         doute = 1;
       }
+      ispressed = 1;
     }
     if(digitalRead(btn3) == HIGH)
     {
+      Serial.println(3);
       time = millis();
       currentScore = 3;
-      needBuzz = 1;
-      ispressed = 1;
+      needBuzz = 1;     
       if(ispressed == 1)
       {
         doute = 1;
       }
+       ispressed = 1;
     }
     if(digitalRead(btn4) == HIGH)
     {
+      Serial.println(4);
       time = millis();
       currentScore = 4;
-      needBuzz = 1;
-      ispressed = 1;
+      needBuzz = 1;     
       if(ispressed == 1)
       {
         doute = 1;
       }
+      ispressed = 1;
     }
 
     if(millis() < time+MAX_TIME_AFFICHE)
@@ -142,7 +148,7 @@ void loop()
       if(currentScore <=4)
       {
             if(doute == 1)
-              postNumber(currentScore, true);
+              postNumber('-', false);
             else
               postNumber(currentScore, false);
       }
@@ -156,6 +162,7 @@ void loop()
           digitalWrite(segmentData, 0);
           digitalWrite(segmentClock, HIGH); //Data transfers to the register on the rising edge of SRCK
        }
+       doute = 0;
     }
     digitalWrite(segmentLatch, LOW);
     digitalWrite(segmentLatch, HIGH); //Register moves storage register on the rising edge of RCK
